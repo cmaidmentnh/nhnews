@@ -4,40 +4,98 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <meta name="theme-color" content="#2563eb" />
+    
+    <!-- Primary Meta Tags -->
+    <title>NH News Central - Live Free or Die State News</title>
+    <meta name="title" content="NH News Central - Live Free or Die State News" />
+    <meta name="description" content="Breaking New Hampshire news aggregated from local sources across the Granite State. Politics, local news, business, crime, and weather from WMUR, Union Leader, NH Bulletin, and 25+ NH news sources." />
+    <meta name="keywords" content="New Hampshire news, NH politics, Granite State news, Manchester news, Nashua news, Concord news, Portsmouth news, local news NH, Kelly Ayotte, NH government, Live Free or Die" />
+    <meta name="author" content="NH News Central" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nhnews.io/" />
+    <meta property="og:title" content="NH News Central - Live Free or Die State News" />
+    <meta property="og:description" content="Breaking New Hampshire news from across the Granite State. Local politics, business, crime, weather and more from 25+ NH news sources." />
+    <meta property="og:image" content="%PUBLIC_URL%/nh-news-og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="NH News Central" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://nhnews.io/" />
+    <meta property="twitter:title" content="NH News Central - Live Free or Die State News" />
+    <meta property="twitter:description" content="Breaking New Hampshire news from across the Granite State. Real-time updates from local sources." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/nh-news-og.png" />
+    <meta property="twitter:creator" content="@NHNewsCentral" />
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="US-NH" />
+    <meta name="geo.placename" content="New Hampshire" />
+    <meta name="geo.position" content="43.1939;-71.5724" />
+    <meta name="ICBM" content="43.1939, -71.5724" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nhnews.io/" />
+    
+    <!-- Preconnect to API domain for performance -->
+    <link rel="preconnect" href="https://nh-news-api.solitary-shadow-b495.workers.dev" />
+    <link rel="dns-prefetch" href="https://nh-news-api.solitary-shadow-b495.workers.dev" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NH News Central",
+      "description": "Breaking New Hampshire news from across the Granite State",
+      "url": "https://nhnews.io/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nhnews.io/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "NH News Central",
+        "description": "New Hampshire news aggregator"
+      },
+      "about": {
+        "@type": "Place",
+        "name": "New Hampshire",
+        "alternateName": "Granite State"
+      }
+    }
+    </script>
+    
+    <!-- Additional Structured Data for News -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsMediaOrganization",
+      "name": "NH News Central",
+      "url": "https://nhnews.io/",
+      "description": "Aggregating news from New Hampshire sources",
+      "areaServed": {
+        "@type": "State",
+        "name": "New Hampshire"
+      },
+      "knowsAbout": ["New Hampshire Politics", "Local News", "Granite State Government"]
+    }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
