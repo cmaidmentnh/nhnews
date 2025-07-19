@@ -242,6 +242,12 @@ body {
   gap: 1rem;
 }
 
+.category-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .category-tag {
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;

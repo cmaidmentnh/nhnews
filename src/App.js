@@ -10,7 +10,7 @@ function App() {
   const [refreshing, setRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-const [selectedCategory, setSelectedCategory] = useState('Politics');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSource, setSelectedSource] = useState('all');
   const [viewMode, setViewMode] = useState('cards');
   const [showStats, setShowStats] = useState(false);
@@ -27,7 +27,7 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
   // Fetch articles from backend
   const fetchArticles = async () => {
     try {
-      const response = await fetch(`${API_BASE}/news?limit=500`);
+      const response = await fetch(`${API_BASE}/news?limit=200`);
       const data = await response.json();
       setArticles(data.articles);
       setFilteredArticles(data.articles);
@@ -54,7 +54,16 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
   // Manual refresh
   const handleRefresh = async () => {
     setRefreshing(true);
-    await fetchArticles(); // Just reload from API, don't call /api/refresh
+    try {
+      const response = await fetch(`${API_BASE}/refresh`, { method: 'POST' });
+      const data = await response.json();
+      if (data.success) {
+        await fetchArticles();
+      }
+    } catch (error) {
+      console.error('Error refreshing:', error);
+      setRefreshing(false);
+    }
   };
 
   // Filter articles
@@ -71,7 +80,7 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
 
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(article =>
-        article.category.toLowerCase() === selectedCategory.toLowerCase()
+        article.categories && article.categories.includes(selectedCategory)
       );
     }
 
@@ -93,7 +102,10 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
     return () => clearInterval(interval);
   }, []);
 
-  const categories = ['all', ...new Set(articles.map(article => article.category))];
+  // Get all unique categories from articles
+  const categories = ['all', ...new Set(
+    articles.flatMap(article => article.categories || ['Local'])
+  )];
   const sources = ['all', ...new Set(articles.map(article => article.source))];
 
   const formatDate = (dateString) => {
@@ -291,9 +303,13 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
                       </h3>
                       <div className="headline-meta">
                         <span>🏢 {article.source}</span>
-                        <span className={`category-tag category-${article.category}`}>
-                          {article.category}
-                        </span>
+                        <div className="category-tags">
+                          {(article.categories || ['Local']).map(category => (
+                            <span key={category} className={`category-tag category-${category}`}>
+                              {category}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     <span className="headline-time">
@@ -303,9 +319,13 @@ const [selectedCategory, setSelectedCategory] = useState('Politics');
                 ) : (
                   <div className="article-content">
                     <div className="article-header">
-                      <span className={`category-tag category-${article.category}`}>
-                        🏷️ {article.category}
-                      </span>
+                      <div className="category-tags">
+                        {(article.categories || ['Local']).map(category => (
+                          <span key={category} className={`category-tag category-${category}`}>
+                            🏷️ {category}
+                          </span>
+                        ))}
+                      </div>
                       <span className="article-time">
                         🕒 {formatDate(article.publishedAt)}
                       </span>
