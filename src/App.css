@@ -1,5 +1,16 @@
-cat > src/App.css << 'EOF'
-/* Main App Styles */
+/* NH News App Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+
 .app {
   min-height: 100vh;
 }
@@ -31,6 +42,7 @@ cat > src/App.css << 'EOF'
   color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .title {
@@ -121,8 +133,6 @@ cat > src/App.css << 'EOF'
   top: 50%;
   transform: translateY(-50%);
   color: #9ca3af;
-  width: 1rem;
-  height: 1rem;
 }
 
 .filter-select {
@@ -183,7 +193,9 @@ cat > src/App.css << 'EOF'
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to { 
+    transform: rotate(360deg); 
+  }
 }
 
 /* Articles */
@@ -237,13 +249,40 @@ cat > src/App.css << 'EOF'
   font-weight: 500;
 }
 
-.category-Politics { background: #fef2f2; color: #991b1b; }
-.category-Local { background: #eff6ff; color: #1e40af; }
-.category-Business { background: #f0fdf4; color: #166534; }
-.category-Sports { background: #fff7ed; color: #c2410c; }
-.category-Weather { background: #f0f9ff; color: #0369a1; }
-.category-Crime { background: #faf5ff; color: #7c3aed; }
-.category-Education { background: #eef2ff; color: #4338ca; }
+.category-Politics { 
+  background: #fef2f2; 
+  color: #991b1b; 
+}
+
+.category-Local { 
+  background: #eff6ff; 
+  color: #1e40af; 
+}
+
+.category-Business { 
+  background: #f0fdf4; 
+  color: #166534; 
+}
+
+.category-Sports { 
+  background: #fff7ed; 
+  color: #c2410c; 
+}
+
+.category-Weather { 
+  background: #f0f9ff; 
+  color: #0369a1; 
+}
+
+.category-Crime { 
+  background: #faf5ff; 
+  color: #7c3aed; 
+}
+
+.category-Education { 
+  background: #eef2ff; 
+  color: #4338ca; 
+}
 
 .article-time {
   font-size: 0.75rem;
@@ -371,7 +410,7 @@ cat > src/App.css << 'EOF'
     align-items: flex-start;
   }
   
-  .headlines-content {
+  .headline-content {
     flex-direction: column;
     align-items: flex-start;
   }
