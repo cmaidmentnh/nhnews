@@ -48,8 +48,8 @@ const NewsletterSignup = () => {
     <div className="newsletter-signup">
       <div className="newsletter-content">
         <div className="newsletter-header">
-          <h3>📧 Daily NH News Digest</h3>
-          <p>Get the top New Hampshire stories delivered to your inbox every evening at 7 PM.</p>
+          <h3>🏛️ NH Politics Daily</h3>
+          <p>Get the top New Hampshire political stories delivered to your inbox every evening at 7 PM.</p>
         </div>
         
         <form onSubmit={handleSubmit} className="newsletter-form">

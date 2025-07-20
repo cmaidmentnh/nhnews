@@ -1,0 +1,25 @@
+name = "nh-news-api"
+main = "src/worker.js"
+compatibility_date = "2023-12-01"
+
+# Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "nh-news-db"
+database_id = "c65cd7a1-3790-4a8a-964c-c16e02e3ac5a"
+
+# KV binding for caching
+[[kv_namespaces]]
+binding = "KV"
+id = "03279b4fb26649d0a97a641251fcfd1d"
+
+# Scheduled triggers for automatic news fetching AND newsletter
+[triggers]
+crons = [
+  "*/30 * * * *",  # Every 30 minutes for news fetching
+  "0 23 * * *"     # 7 PM EST (11 PM UTC) for newsletter
+]
+
+# Environment variables (set via wrangler secret put)
+[env.production.vars]
+ENVIRONMENT = "production"
