@@ -203,15 +203,15 @@ body {
 }
 
 .info-dropdown {
-  position: fixed; /* Use fixed positioning */
-  top: 80px; /* Position below header */
-  right: 20px; /* Right edge padding */
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 9999; /* Much higher than everything else */
-  min-width: 200px;
+  position: fixed !important; /* Force fixed positioning */
+  top: 80px !important; /* Position below header */
+  right: 20px !important; /* Right edge padding */
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 99999 !important; /* Extremely high z-index */
+  min-width: 200px !important;
 }
 
 .dropdown-item {
