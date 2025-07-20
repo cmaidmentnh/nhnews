@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import NewsletterSignup from './NewsletterSignup';
+import PrivacyPolicy from './PrivacyPolicy';
 
 const API_BASE = 'https://nh-news-api.solitary-shadow-b495.workers.dev/api';
 
@@ -16,6 +17,7 @@ function App() {
   const [viewMode, setViewMode] = useState('cards');
   const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState(null);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
 
   // Decode HTML entities
   const decodeHtml = (html) => {
@@ -376,8 +378,29 @@ function App() {
           <p style={{ fontSize: '0.875rem', marginTop: '0.25rem' }}>
             Last updated: {lastUpdated ? new Date(lastUpdated).toLocaleString() : 'Unknown'}
           </p>
+          <div style={{ marginTop: '0.5rem', fontSize: '0.875rem' }}>
+            <button 
+              onClick={() => setShowPrivacyPolicy(true)}
+              style={{ 
+                background: 'none', 
+                border: 'none', 
+                color: '#2563eb', 
+                textDecoration: 'underline', 
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                padding: 0
+              }}
+            >
+              Privacy Policy
+            </button>
+          </div>
         </div>
       </footer>
+
+      {/* Privacy Policy Modal */}
+      {showPrivacyPolicy && (
+        <PrivacyPolicy onClose={() => setShowPrivacyPolicy(false)} />
+      )}
     </div>
   );
 }
