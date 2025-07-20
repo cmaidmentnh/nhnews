@@ -36,6 +36,13 @@ body {
   transform: translateY(-100%);
 }
 
+/* Mobile specific - ensure complete hiding */
+@media (max-width: 768px) {
+  .header-hidden {
+    transform: translateY(-120%); /* Hide completely including any button overflow */
+  }
+}
+
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -821,7 +828,7 @@ body {
   }
   
   .controls-hidden {
-    transform: translateY(calc(-100% - 100px)); /* Adjust for mobile header */
+    transform: translateY(calc(-120% - 120px)); /* Ensure complete hiding on mobile */
   }
   
   .main {
