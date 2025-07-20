@@ -42,6 +42,10 @@ body {
     display: none; /* Hide Stats and Refresh buttons on mobile */
   }
   
+  .header {
+    min-height: auto; /* Reset min-height since no buttons to stack */
+  }
+  
   .header-hidden {
     transform: translateY(-100%);
   }
@@ -829,7 +833,7 @@ body {
   }
 
   .controls {
-    top: 120px; /* Match the mobile header min-height */
+    top: 80px; /* Back to original since no stacked buttons */
   }
   
   .controls-hidden {
@@ -837,6 +841,6 @@ body {
   }
   
   .main {
-    padding-top: 180px; /* Account for 120px header + ~60px controls */
+    padding-top: 140px; /* Account for smaller header + controls on mobile */
   }
 }
