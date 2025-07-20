@@ -279,7 +279,10 @@ function App() {
       {/* Mobile hamburger menu - positioned outside header */}
       <div className="mobile-hamburger-fixed mobile-only">
         <button
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          onClick={() => {
+            console.log('Mobile menu clicked, current state:', showMobileMenu);
+            setShowMobileMenu(!showMobileMenu);
+          }}
           className="btn btn-secondary mobile-menu-btn"
         >
           ☰ Menu
@@ -555,7 +558,7 @@ function App() {
       )}
 
       {/* Mobile Menu Modal */}
-      {showMobileMenu && (
+      {showMobileMenu && (console.log('Rendering mobile menu modal') ||
         <div className="modal-overlay" onClick={() => setShowMobileMenu(false)}>
           <div className="mobile-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
