@@ -270,22 +270,6 @@ function App() {
                 ℹ️ Info
               </button>
               
-              {showInfoMenu && (
-                <div className="info-dropdown">
-                  <button
-                    onClick={() => {
-                      setShowPrivacyPolicy(true);
-                      setShowInfoMenu(false);
-                    }}
-                    className="dropdown-item"
-                  >
-                    📄 Privacy Policy
-                  </button>
-                  <div className="dropdown-item contact-info">
-                    📧 Contact: info@nhnews.io
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Mobile hamburger menu */}
@@ -297,41 +281,6 @@ function App() {
                 ☰ Menu
               </button>
               
-              {showMobileMenu && (
-                <div className="mobile-dropdown">
-                  <button
-                    onClick={() => {
-                      setShowStats(!showStats);
-                      setShowMobileMenu(false);
-                    }}
-                    className="dropdown-item"
-                  >
-                    📊 Stats
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleRefresh();
-                      setShowMobileMenu(false);
-                    }}
-                    disabled={refreshing}
-                    className="dropdown-item"
-                  >
-                    {refreshing ? '🔄 Refreshing...' : '🔄 Refresh'}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowPrivacyPolicy(true);
-                      setShowMobileMenu(false);
-                    }}
-                    className="dropdown-item"
-                  >
-                    📄 Privacy Policy
-                  </button>
-                  <div className="dropdown-item contact-info">
-                    📧 Contact: info@nhnews.io
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -573,6 +522,87 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Info Menu Modal */}
+      {showInfoMenu && (
+        <div className="modal-overlay" onClick={() => setShowInfoMenu(false)}>
+          <div className="info-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Menu</h3>
+              <button 
+                className="close-btn" 
+                onClick={() => setShowInfoMenu(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="modal-content">
+              <button
+                onClick={() => {
+                  setShowPrivacyPolicy(true);
+                  setShowInfoMenu(false);
+                }}
+                className="modal-button"
+              >
+                📄 Privacy Policy
+              </button>
+              <div className="modal-info">
+                📧 Contact: info@nhnews.io
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu Modal */}
+      {showMobileMenu && (
+        <div className="modal-overlay" onClick={() => setShowMobileMenu(false)}>
+          <div className="mobile-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Menu</h3>
+              <button 
+                className="close-btn" 
+                onClick={() => setShowMobileMenu(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="modal-content">
+              <button
+                onClick={() => {
+                  setShowStats(!showStats);
+                  setShowMobileMenu(false);
+                }}
+                className="modal-button"
+              >
+                📊 Stats
+              </button>
+              <button
+                onClick={() => {
+                  handleRefresh();
+                  setShowMobileMenu(false);
+                }}
+                disabled={refreshing}
+                className="modal-button"
+              >
+                {refreshing ? '🔄 Refreshing...' : '🔄 Refresh'}
+              </button>
+              <button
+                onClick={() => {
+                  setShowPrivacyPolicy(true);
+                  setShowMobileMenu(false);
+                }}
+                className="modal-button"
+              >
+                📄 Privacy Policy
+              </button>
+              <div className="modal-info">
+                📧 Contact: info@nhnews.io
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Privacy Policy Modal */}
       {showPrivacyPolicy && (
