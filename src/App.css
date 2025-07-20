@@ -439,7 +439,7 @@ body {
 .newsletter-signup {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: white;
-  margin: 2rem 0;
+  margin: 1rem 0; /* Reduce desktop margins */
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -848,5 +848,9 @@ body {
   
   .main {
     padding-top: 140px; /* Account for smaller header + controls on mobile */
+  }
+  
+  .newsletter-signup {
+    margin: 1rem 0 0.5rem 0; /* Less bottom margin on mobile */
   }
 }
