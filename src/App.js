@@ -18,6 +18,10 @@ function App() {
   const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState(null);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [displayedArticles, setDisplayedArticles] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Decode HTML entities
   const decodeHtml = (html) => {
@@ -34,6 +38,8 @@ function App() {
       const data = await response.json();
       setArticles(data.articles);
       setFilteredArticles(data.articles);
+      setDisplayedArticles(data.articles.slice(0, 15)); // Show first 15
+      setHasMore(data.articles.length > 15);
       setLastUpdated(data.lastUpdated);
     } catch (error) {
       console.error('Error fetching articles:', error);
@@ -69,6 +75,40 @@ function App() {
     }
   };
 
+  // Load more articles for infinite scroll
+  const loadMoreArticles = () => {
+    if (loadingMore || !hasMore) return;
+    
+    setLoadingMore(true);
+    const currentLength = displayedArticles.length;
+    const nextBatch = filteredArticles.slice(currentLength, currentLength + 15);
+    
+    setTimeout(() => {
+      setDisplayedArticles(prev => [...prev, ...nextBatch]);
+      setHasMore(currentLength + nextBatch.length < filteredArticles.length);
+      setLoadingMore(false);
+    }, 300); // Small delay to show loading state
+  };
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Handle scroll events
+  const handleScroll = () => {
+    // Show/hide back to top button
+    setShowBackToTop(window.scrollY > 300);
+
+    // Infinite scroll detection
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+      loadMoreArticles();
+    }
+  };
+
   // Filter articles
   useEffect(() => {
     let filtered = articles;
@@ -94,6 +134,8 @@ function App() {
     }
 
     setFilteredArticles(filtered);
+    setDisplayedArticles(filtered.slice(0, 15)); // Reset to first 15 when filters change
+    setHasMore(filtered.length > 15);
   }, [articles, searchTerm, selectedCategory, selectedSource]);
 
   // Initial load
@@ -104,6 +146,12 @@ function App() {
     const interval = setInterval(fetchArticles, 10 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
+
+  // Scroll event listener
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [displayedArticles, filteredArticles, loadingMore, hasMore]);
 
   // Get all unique categories from articles
   const categories = ['all', ...new Set(
@@ -281,7 +329,7 @@ function App() {
 
       {/* Main Content */}
       <main className="main">
-        {filteredArticles.length === 0 ? (
+        {displayedArticles.length === 0 && !loading ? (
           <div className="empty-state">
             No articles found matching your criteria
           </div>
@@ -291,7 +339,7 @@ function App() {
             viewMode === 'list' ? 'articles-list' :
             'articles-headlines'
           }>
-            {filteredArticles.map((article, index) => (
+            {displayedArticles.map((article, index) => (
               <article key={article.id} className={viewMode === 'headlines' ? 'headline-article' : 'article'}>
                 {viewMode === 'headlines' ? (
                   <div className="headline-content">
@@ -367,9 +415,31 @@ function App() {
                 )}
               </article>
             ))}
+
+            {/* Load More Indicator */}
+            {loadingMore && (
+              <div className="loading-more">
+                <div className="spinner"></div>
+                <span>Loading more articles...</span>
+              </div>
+            )}
+
+            {/* End of Articles Message */}
+            {!hasMore && displayedArticles.length > 0 && (
+              <div className="end-message">
+                You've reached the end! 🎉
+              </div>
+            )}
           </div>
         )}
       </main>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button onClick={scrollToTop} className="back-to-top">
+          ↑
+        </button>
+      )}
 
       {/* Footer */}
       <footer className="footer">
