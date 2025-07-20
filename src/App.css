@@ -20,6 +20,20 @@ body {
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-bottom: 4px solid #2563eb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-visible {
+  transform: translateY(0);
+}
+
+.header-hidden {
+  transform: translateY(-100%);
 }
 
 .header-content {
@@ -171,6 +185,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 180px; /* Account for fixed header + controls */
 }
 
 /* Loading */
@@ -716,13 +731,24 @@ body {
 
 /* Sticky Controls (Search & Filters) */
 .controls {
-  position: sticky;
+  position: fixed;
   top: 80px; /* Position below the header */
-  z-index: 45;
+  left: 0;
+  right: 0;
+  z-index: 90;
   background: white;
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   margin-bottom: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.controls-visible {
+  transform: translateY(0);
+}
+
+.controls-hidden {
+  transform: translateY(calc(-100% - 80px)); /* Move up by its height plus header height */
 }
 
 /* Mobile responsive */
@@ -791,6 +817,14 @@ body {
   }
 
   .controls {
-    top: 120px; /* Adjust for mobile header height */
+    top: 100px; /* Adjust for mobile header height */
+  }
+  
+  .controls-hidden {
+    transform: translateY(calc(-100% - 100px)); /* Adjust for mobile header */
+  }
+  
+  .main {
+    padding-top: 160px; /* Less top padding on mobile */
   }
 }

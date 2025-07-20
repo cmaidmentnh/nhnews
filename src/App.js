@@ -22,6 +22,8 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Decode HTML entities
   const decodeHtml = (html) => {
@@ -85,8 +87,26 @@ function App() {
 
   // Handle scroll events
   const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    
     // Show/hide back to top button
-    setShowBackToTop(window.scrollY > 300);
+    setShowBackToTop(currentScrollY > 300);
+
+    // Header visibility logic - only on mobile devices
+    if (window.innerWidth <= 768) {
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past the threshold
+        setHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setHeaderVisible(true);
+      }
+    } else {
+      // Always show header on desktop
+      setHeaderVisible(true);
+    }
+    
+    setLastScrollY(currentScrollY);
 
     // Infinite scroll detection
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
@@ -103,7 +123,7 @@ function App() {
         setLoadingMore(false);
       }, 300);
     }
-  }, [displayedArticles.length, filteredArticles, loadingMore, hasMore]);
+  }, [displayedArticles.length, filteredArticles, loadingMore, hasMore, lastScrollY]);
 
   // Filter articles
   useEffect(() => {
@@ -149,6 +169,19 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
+  // Handle window resize for responsive header behavior
+  useEffect(() => {
+    const handleResize = () => {
+      // Reset header visibility on resize
+      if (window.innerWidth > 768) {
+        setHeaderVisible(true);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Get all unique categories from articles
   const categories = ['all', ...new Set(
     articles.flatMap(article => article.categories || ['Local'])
@@ -183,7 +216,7 @@ function App() {
   return (
     <div className="app">
       {/* Header */}
-      <header className="header">
+      <header className={`header ${headerVisible ? 'header-visible' : 'header-hidden'}`}>
         <div className="header-content">
           <div className="logo">
             <div className="logo-icon">
@@ -259,7 +292,7 @@ function App() {
       )}
 
       {/* Controls */}
-      <div className="controls">
+      <div className={`controls ${headerVisible ? 'controls-visible' : 'controls-hidden'}`}>
         <div className="controls-content">
           {/* Search */}
           <div className="search-container">
