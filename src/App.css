@@ -48,6 +48,10 @@ body {
     display: none !important; /* Also hide any buttons directly */
   }
   
+  .info-menu-container {
+    display: none !important; /* Hide info menu on mobile */
+  }
+  
   .header {
     min-height: auto; /* Reset min-height since no buttons to stack */
   }
@@ -130,6 +134,55 @@ body {
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Info Menu Dropdown */
+.info-menu-container {
+  position: relative;
+}
+
+.info-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 200;
+  min-width: 200px;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dropdown-item:hover {
+  background: #f9fafb;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item.contact-info {
+  cursor: default;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.dropdown-item.contact-info:hover {
+  background: white;
 }
 
 /* Controls */

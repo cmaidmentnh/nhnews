@@ -18,6 +18,7 @@ function App() {
   const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState(null);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showInfoMenu, setShowInfoMenu] = useState(false);
   const [displayedArticles, setDisplayedArticles] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -182,6 +183,18 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Handle click outside to close info menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showInfoMenu && !event.target.closest('.info-menu-container')) {
+        setShowInfoMenu(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showInfoMenu]);
+
   // Get all unique categories from articles
   const categories = ['all', ...new Set(
     articles.flatMap(article => article.categories || ['Local'])
@@ -243,6 +256,32 @@ function App() {
             >
               {refreshing ? '🔄 Refreshing...' : '🔄 Refresh'}
             </button>
+            
+            <div className="info-menu-container">
+              <button
+                onClick={() => setShowInfoMenu(!showInfoMenu)}
+                className="btn btn-secondary"
+              >
+                ℹ️ Info
+              </button>
+              
+              {showInfoMenu && (
+                <div className="info-dropdown">
+                  <button
+                    onClick={() => {
+                      setShowPrivacyPolicy(true);
+                      setShowInfoMenu(false);
+                    }}
+                    className="dropdown-item"
+                  >
+                    📄 Privacy Policy
+                  </button>
+                  <div className="dropdown-item contact-info">
+                    📧 Contact: info@nhnews.io
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
