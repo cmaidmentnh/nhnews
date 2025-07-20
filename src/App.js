@@ -288,43 +288,31 @@ function App() {
 
       {/* Stats Panel */}
       {showStats && stats && (
-        <div style={{
-          background: 'white',
-          borderBottom: '1px solid #e5e7eb',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-        }}>
-          <div style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            padding: '1rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1rem',
-            textAlign: 'center'
-          }}>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb' }}>
+        <div className="stats-panel">
+          <div className="stats-content">
+            <div className="stat-item">
+              <div className="stat-number stat-total">
                 {stats.totalArticles}
               </div>
-              <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Total Articles</div>
+              <div className="stat-label">Total Articles</div>
             </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#059669' }}>
+            <div className="stat-item">
+              <div className="stat-number stat-sources">
                 {stats.totalSources}
               </div>
-              <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>News Sources</div>
+              <div className="stat-label">News Sources</div>
             </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#d97706' }}>
+            <div className="stat-item">
+              <div className="stat-number stat-categories">
                 {Object.keys(stats.categoryBreakdown || {}).length}
               </div>
-              <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Categories</div>
+              <div className="stat-label">Categories</div>
             </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#7c3aed' }}>
+            <div className="stat-item">
+              <div className="stat-number stat-updated">
                 {lastUpdated ? formatDate(lastUpdated) : 'Unknown'}
               </div>
-              <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Last Updated</div>
+              <div className="stat-label">Last Updated</div>
             </div>
           </div>
         </div>
