@@ -847,11 +847,11 @@ body {
   }
   
   .main {
-    padding-top: 140px; /* Back to 140px for proper newsletter positioning */
+    padding-top: 20px; /* Reduced top padding on mobile */
   }
   
   .newsletter-signup {
-    margin-top: 0; /* No additional margin since main has 140px padding */
+    margin-top: 140px; /* Newsletter positioned 140px from top */
     margin-bottom: 0;
   }
 }
