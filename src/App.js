@@ -75,21 +75,6 @@ function App() {
     }
   };
 
-  // Load more articles for infinite scroll
-  const loadMoreArticles = useCallback(() => {
-    if (loadingMore || !hasMore) return;
-    
-    setLoadingMore(true);
-    const currentLength = displayedArticles.length;
-    const nextBatch = filteredArticles.slice(currentLength, currentLength + 15);
-    
-    setTimeout(() => {
-      setDisplayedArticles(prev => [...prev, ...nextBatch]);
-      setHasMore(currentLength + nextBatch.length < filteredArticles.length);
-      setLoadingMore(false);
-    }, 300); // Small delay to show loading state
-  }, [displayedArticles.length, filteredArticles, loadingMore, hasMore]);
-
   // Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
@@ -105,9 +90,20 @@ function App() {
 
     // Infinite scroll detection
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
-      loadMoreArticles();
+      // Inline load more logic to avoid circular dependency
+      if (loadingMore || !hasMore) return;
+      
+      setLoadingMore(true);
+      const currentLength = displayedArticles.length;
+      const nextBatch = filteredArticles.slice(currentLength, currentLength + 15);
+      
+      setTimeout(() => {
+        setDisplayedArticles(prev => [...prev, ...nextBatch]);
+        setHasMore(currentLength + nextBatch.length < filteredArticles.length);
+        setLoadingMore(false);
+      }, 300);
     }
-  }, [displayedArticles.length, filteredArticles.length, loadingMore, hasMore]);
+  }, [displayedArticles.length, filteredArticles, loadingMore, hasMore]);
 
   // Filter articles
   useEffect(() => {
