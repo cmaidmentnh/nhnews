@@ -846,8 +846,12 @@ body {
     transform: translateY(calc(-200% - 200px)); /* Ensure complete hiding on mobile */
   }
   
-  .main {
-    padding-top: 20px; /* Reduced top padding on mobile */
+  div.main {
+    padding-top: 140px; /* Newsletter container - positioned below controls */
+  }
+  
+  main.main {
+    padding-top: 20px; /* Articles container - reduced top padding on mobile */
   }
   
   .newsletter-signup {
