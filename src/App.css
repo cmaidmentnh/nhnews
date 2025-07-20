@@ -206,7 +206,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  padding-top: 180px; /* Account for fixed header + controls */
+  padding-top: 60px; /* Reduced top padding */
 }
 
 /* Loading */
@@ -847,7 +847,7 @@ body {
   }
   
   .main {
-    padding-top: 140px; /* Account for smaller header + controls on mobile */
+    padding-top: 20px; /* Reduced top padding on mobile */
   }
   
   .newsletter-signup {
