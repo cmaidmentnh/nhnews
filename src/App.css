@@ -36,10 +36,10 @@ body {
   transform: translateY(-100%);
 }
 
-/* Mobile specific - ensure complete hiding and proper sizing */
+/* Mobile specific - hide buttons completely on mobile */
 @media (max-width: 768px) {
-  .header {
-    min-height: 120px; /* Ensure header is tall enough for stacked content */
+  .header-buttons {
+    display: none; /* Hide Stats and Refresh buttons on mobile */
   }
   
   .header-hidden {
@@ -829,7 +829,7 @@ body {
   }
 
   .controls {
-    top: 100px; /* Adjust for mobile header height */
+    top: 120px; /* Match the mobile header min-height */
   }
   
   .controls-hidden {
@@ -837,6 +837,6 @@ body {
   }
   
   .main {
-    padding-top: 160px; /* Less top padding on mobile */
+    padding-top: 180px; /* Account for 120px header + ~60px controls */
   }
 }
