@@ -36,20 +36,40 @@ body {
   transform: translateY(-100%);
 }
 
-/* Mobile specific - hide buttons completely on mobile */
+/* Desktop/Mobile visibility toggles */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/* Mobile hamburger menu */
+.mobile-menu-container {
+  position: relative;
+}
+
+.mobile-dropdown {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  min-width: 200px;
+}
+
+/* Mobile specific */
 @media (max-width: 768px) {
-  .header-buttons {
-    display: none !important; /* Force hide Stats and Refresh buttons on mobile */
-    visibility: hidden !important;
-    opacity: 0 !important;
+  .desktop-only {
+    display: none !important;
   }
   
-  .btn {
-    display: none !important; /* Also hide any buttons directly */
-  }
-  
-  .info-menu-container {
-    display: none !important; /* Hide info menu on mobile */
+  .mobile-only {
+    display: flex !important;
   }
   
   .header {

@@ -19,6 +19,7 @@ function App() {
   const [stats, setStats] = useState(null);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [showInfoMenu, setShowInfoMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [displayedArticles, setDisplayedArticles] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -183,17 +184,20 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Handle click outside to close info menu
+  // Handle click outside to close menus
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showInfoMenu && !event.target.closest('.info-menu-container')) {
         setShowInfoMenu(false);
       }
+      if (showMobileMenu && !event.target.closest('.mobile-menu-container')) {
+        setShowMobileMenu(false);
+      }
     };
     
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [showInfoMenu]);
+  }, [showInfoMenu, showMobileMenu]);
 
   // Get all unique categories from articles
   const categories = ['all', ...new Set(
@@ -242,9 +246,10 @@ function App() {
           </div>
           
           <div className="header-buttons">
+            {/* Desktop buttons */}
             <button
               onClick={() => setShowStats(!showStats)}
-              className="btn btn-secondary"
+              className="btn btn-secondary desktop-only"
             >
               📊 Stats
             </button>
@@ -252,12 +257,12 @@ function App() {
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="btn btn-primary"
+              className="btn btn-primary desktop-only"
             >
               {refreshing ? '🔄 Refreshing...' : '🔄 Refresh'}
             </button>
             
-            <div className="info-menu-container">
+            <div className="info-menu-container desktop-only">
               <button
                 onClick={() => setShowInfoMenu(!showInfoMenu)}
                 className="btn btn-secondary"
@@ -271,6 +276,52 @@ function App() {
                     onClick={() => {
                       setShowPrivacyPolicy(true);
                       setShowInfoMenu(false);
+                    }}
+                    className="dropdown-item"
+                  >
+                    📄 Privacy Policy
+                  </button>
+                  <div className="dropdown-item contact-info">
+                    📧 Contact: info@nhnews.io
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile hamburger menu */}
+            <div className="mobile-menu-container mobile-only">
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="btn btn-secondary mobile-menu-btn"
+              >
+                ☰ Menu
+              </button>
+              
+              {showMobileMenu && (
+                <div className="mobile-dropdown">
+                  <button
+                    onClick={() => {
+                      setShowStats(!showStats);
+                      setShowMobileMenu(false);
+                    }}
+                    className="dropdown-item"
+                  >
+                    📊 Stats
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleRefresh();
+                      setShowMobileMenu(false);
+                    }}
+                    disabled={refreshing}
+                    className="dropdown-item"
+                  >
+                    {refreshing ? '🔄 Refreshing...' : '🔄 Refresh'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowPrivacyPolicy(true);
+                      setShowMobileMenu(false);
                     }}
                     className="dropdown-item"
                   >
