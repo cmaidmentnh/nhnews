@@ -183,16 +183,15 @@ body {
 }
 
 .info-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
+  position: fixed; /* Use fixed positioning */
+  top: 80px; /* Position below header */
+  right: 20px; /* Right edge padding */
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000; /* Higher than controls (z-index: 90) */
+  z-index: 9999; /* Much higher than everything else */
   min-width: 200px;
-  margin-top: 0.5rem;
 }
 
 .dropdown-item {
@@ -301,6 +300,10 @@ body {
   margin: 0 auto;
   padding: 2rem;
   padding-top: 60px; /* Reduced top padding */
+}
+
+.main-with-stats {
+  padding-top: 140px; /* Extra space when stats panel is shown */
 }
 
 /* Loading */
@@ -864,6 +867,10 @@ body {
 
 .controls-hidden {
   transform: translateY(calc(-100% - 80px)); /* Move up by its height plus header height */
+}
+
+.controls-with-stats {
+  top: 160px; /* Header (80px) + Stats panel (~80px) */
 }
 
 /* Mobile responsive */

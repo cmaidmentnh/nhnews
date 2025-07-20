@@ -319,7 +319,7 @@ function App() {
       )}
 
       {/* Controls */}
-      <div className={`controls ${headerVisible ? 'controls-visible' : 'controls-hidden'}`}>
+      <div className={`controls ${headerVisible ? 'controls-visible' : 'controls-hidden'} ${showStats ? 'controls-with-stats' : ''}`}>
         <div className="controls-content">
           {/* Search */}
           <div className="search-container">
@@ -379,12 +379,12 @@ function App() {
       </div>
 
       {/* Newsletter Signup */}
-      <div className="main">
+      <div className={`main ${showStats ? 'main-with-stats' : ''}`}>
         <NewsletterSignup />
       </div>
 
       {/* Main Content */}
-      <main className="main">
+      <main className={`main ${showStats ? 'main-with-stats' : ''}`}>
         {displayedArticles.length === 0 && !loading ? (
           <div className="empty-state">
             No articles found matching your criteria
