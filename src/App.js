@@ -35,6 +35,36 @@ function App() {
     return txt.value;
   };
 
+  // Track article clicks
+  const trackArticleClick = async (articleId, articleUrl, articleTitle) => {
+    try {
+      // Send to our backend for tracking
+      await fetch(`${API_BASE}/track-click`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          articleId,
+          url: articleUrl,
+          title: articleTitle,
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      // Also send to Google Analytics if available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'article_click', {
+          'article_id': articleId,
+          'article_title': articleTitle,
+          'article_url': articleUrl
+        });
+      }
+    } catch (error) {
+      console.error('Error tracking click:', error);
+    }
+  };
+
   // Fetch articles from backend
   const fetchArticles = async () => {
     try {
@@ -411,6 +441,7 @@ function App() {
                             href={article.url} 
                             target="_blank" 
                             rel="noopener noreferrer"
+                            onClick={() => trackArticleClick(article.id, article.url, article.title)}
                           >
                             {decodeHtml(article.title)} ↗
                           </a>
@@ -454,6 +485,7 @@ function App() {
                           href={article.url} 
                           target="_blank" 
                           rel="noopener noreferrer"
+                          onClick={() => trackArticleClick(article.id, article.url, article.title)}
                         >
                           {decodeHtml(article.title)}
                           <span className="external-icon">↗</span>
