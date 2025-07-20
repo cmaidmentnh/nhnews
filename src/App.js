@@ -285,7 +285,7 @@ function App() {
           }}
           className="btn btn-secondary mobile-menu-btn"
         >
-          ☰ Menu
+          ☰
         </button>
       </div>
 

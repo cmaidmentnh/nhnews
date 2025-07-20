@@ -1017,6 +1017,10 @@ body {
     padding: 1rem; /* Reduce padding on mobile */
   }
   
+  .logo {
+    margin-right: 60px; /* Make room for hamburger button */
+  }
+  
   .controls-content {
     flex-direction: column;
   }
