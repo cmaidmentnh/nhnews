@@ -190,7 +190,7 @@ function App() {
       if (showInfoMenu && !event.target.closest('.info-menu-container')) {
         setShowInfoMenu(false);
       }
-      if (showMobileMenu && !event.target.closest('.mobile-menu-container')) {
+      if (showMobileMenu && !event.target.closest('.mobile-hamburger-fixed')) {
         setShowMobileMenu(false);
       }
     };
@@ -279,9 +279,11 @@ function App() {
       {/* Mobile hamburger menu - positioned outside header */}
       <div className="mobile-hamburger-fixed mobile-only">
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             console.log('Mobile menu clicked, current state:', showMobileMenu);
-            setShowMobileMenu(!showMobileMenu);
+            setShowMobileMenu(true);
           }}
           className="btn btn-secondary mobile-menu-btn"
         >
