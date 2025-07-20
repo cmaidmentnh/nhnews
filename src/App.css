@@ -39,7 +39,7 @@ body {
 /* Mobile specific - ensure complete hiding */
 @media (max-width: 768px) {
   .header-hidden {
-    transform: translateY(-120%); /* Hide completely including any button overflow */
+    transform: translateY(-150%); /* Hide completely including any button overflow */
   }
 }
 
@@ -828,7 +828,7 @@ body {
   }
   
   .controls-hidden {
-    transform: translateY(calc(-120% - 120px)); /* Ensure complete hiding on mobile */
+    transform: translateY(calc(-150% - 150px)); /* Ensure complete hiding on mobile */
   }
   
   .main {
