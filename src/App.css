@@ -852,6 +852,6 @@ body {
   
   .newsletter-signup {
     margin-top: 160px; /* Header (80px) + Controls (60px) + 20px clearance */
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 }
