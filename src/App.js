@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import NewsletterSignup from './NewsletterSignup';
 
 const API_BASE = 'https://nh-news-api.solitary-shadow-b495.workers.dev/api';
 
@@ -269,6 +270,11 @@ function App() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Newsletter Signup */}
+      <div className="main">
+        <NewsletterSignup />
       </div>
 
       {/* Main Content */}
