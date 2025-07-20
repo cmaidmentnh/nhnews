@@ -39,7 +39,13 @@ body {
 /* Mobile specific - hide buttons completely on mobile */
 @media (max-width: 768px) {
   .header-buttons {
-    display: none; /* Hide Stats and Refresh buttons on mobile */
+    display: none !important; /* Force hide Stats and Refresh buttons on mobile */
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  
+  .btn {
+    display: none !important; /* Also hide any buttons directly */
   }
   
   .header {
