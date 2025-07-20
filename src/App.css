@@ -714,6 +714,17 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Sticky Controls (Search & Filters) */
+.controls {
+  position: sticky;
+  top: 80px; /* Position below the header */
+  z-index: 45;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .privacy-policy-modal {
@@ -777,5 +788,9 @@ body {
 
   .loading-more {
     padding: 1.5rem;
+  }
+
+  .controls {
+    top: 120px; /* Adjust for mobile header height */
   }
 }
