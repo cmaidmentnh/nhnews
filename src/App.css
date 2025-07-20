@@ -45,9 +45,12 @@ body {
   display: flex;
 }
 
-/* Mobile hamburger menu */
-.mobile-menu-container {
-  position: relative;
+/* Mobile hamburger menu - fixed position */
+.mobile-hamburger-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
 }
 
 .mobile-dropdown {

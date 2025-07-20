@@ -272,19 +272,19 @@ function App() {
               
             </div>
 
-            {/* Mobile hamburger menu */}
-            <div className="mobile-menu-container mobile-only">
-              <button
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-                className="btn btn-secondary mobile-menu-btn"
-              >
-                ☰ Menu
-              </button>
-              
-            </div>
           </div>
         </div>
       </header>
+
+      {/* Mobile hamburger menu - positioned outside header */}
+      <div className="mobile-hamburger-fixed mobile-only">
+        <button
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          className="btn btn-secondary mobile-menu-btn"
+        >
+          ☰ Menu
+        </button>
+      </div>
 
       {/* Stats Panel */}
       {showStats && stats && (
