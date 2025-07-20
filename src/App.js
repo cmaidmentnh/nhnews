@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import NewsletterSignup from './NewsletterSignup';
 import PrivacyPolicy from './PrivacyPolicy';
@@ -76,7 +76,7 @@ function App() {
   };
 
   // Load more articles for infinite scroll
-  const loadMoreArticles = () => {
+  const loadMoreArticles = useCallback(() => {
     if (loadingMore || !hasMore) return;
     
     setLoadingMore(true);
@@ -88,7 +88,7 @@ function App() {
       setHasMore(currentLength + nextBatch.length < filteredArticles.length);
       setLoadingMore(false);
     }, 300); // Small delay to show loading state
-  };
+  }, [displayedArticles.length, filteredArticles, loadingMore, hasMore]);
 
   // Scroll to top function
   const scrollToTop = () => {
@@ -99,7 +99,7 @@ function App() {
   };
 
   // Handle scroll events
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     // Show/hide back to top button
     setShowBackToTop(window.scrollY > 300);
 
@@ -107,7 +107,7 @@ function App() {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
       loadMoreArticles();
     }
-  };
+  }, [displayedArticles.length, filteredArticles.length, loadingMore, hasMore]);
 
   // Filter articles
   useEffect(() => {
@@ -151,7 +151,7 @@ function App() {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [displayedArticles, filteredArticles, loadingMore, hasMore]);
+  }, [handleScroll]);
 
   // Get all unique categories from articles
   const categories = ['all', ...new Set(
