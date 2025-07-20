@@ -851,6 +851,6 @@ body {
   }
   
   .newsletter-signup {
-    margin: 1rem 0 0.5rem 0; /* Less bottom margin on mobile */
+    margin: 2rem 0 0.5rem 0; /* More top margin to clear controls on mobile */
   }
 }
