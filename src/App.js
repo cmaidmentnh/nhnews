@@ -37,9 +37,10 @@ function App() {
 
   // Track article clicks
   const trackArticleClick = async (articleId, articleUrl, articleTitle) => {
+    console.log('🖱️ Tracking click for:', articleId);
     try {
       // Send to our backend for tracking
-      await fetch(`${API_BASE}/track-click`, {
+      const response = await fetch(`${API_BASE}/track-click`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +52,12 @@ function App() {
           timestamp: new Date().toISOString()
         })
       });
+
+      if (!response.ok) {
+        console.error('Click tracking failed:', response.status, await response.text());
+      } else {
+        console.log('✅ Click tracked successfully');
+      }
 
       // Also send to Google Analytics if available
       if (typeof gtag !== 'undefined') {
