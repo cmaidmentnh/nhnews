@@ -60,8 +60,8 @@ function App() {
       }
 
       // Also send to Google Analytics if available
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'article_click', {
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('event', 'article_click', {
           'article_id': articleId,
           'article_title': articleTitle,
           'article_url': articleUrl
